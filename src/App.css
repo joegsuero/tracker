@@ -1,0 +1,178 @@
+/* Reset básico para body y html */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2f2f2f; /* Fondo gris oscuro para toda la página */
+  color: #f6f6f6; /* Texto claro */
+}
+
+.container {
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: #2f2f2f; /* Fondo gris oscuro */
+  color: #f6f6f6; /* Texto claro */
+  height: 90vh;
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #f6f6f6; /* Texto claro */
+}
+
+.add-button {
+  background-color: #3e4147;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.25s;
+}
+
+.add-button:hover {
+  background-color: white;
+  color: #3e4147; /* Texto claro */
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  max-width: 800px;
+}
+
+.post-item {
+  background-color: #1e1e1e; /* Fondo gris muy oscuro */
+  border: 1px solid #444; /* Borde gris */
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  position: relative;
+}
+
+.post-item:hover {
+  background-color: #2a2a2a; /* Fondo gris un poco más claro al pasar el mouse */
+}
+
+.post-item h2 {
+  margin: 0 0 10px;
+  color: #f6f6f6; /* Texto claro */
+}
+
+.post-item p {
+  margin: 0 0 10px;
+  color: #f6f6f6; /* Texto claro */
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.tag {
+  background-color: #444; /* Fondo gris oscuro */
+  color: #f6f6f6; /* Texto claro */
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  gap: 15px;
+}
+
+.title-input,
+.content-textarea,
+.tags-input {
+  background-color: #1e1e1e; /* Fondo gris muy oscuro */
+  color: #f6f6f6; /* Texto claro */
+  border: 1px solid #444; /* Borde gris */
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1em;
+  font-family: inherit;
+  transition: border-color 0.25s;
+}
+
+.title-input:focus,
+.content-textarea:focus,
+.tags-input:focus {
+  border-color: #1e1e1e; /* Borde azul al enfocar */
+  outline: none;
+}
+
+.content-textarea {
+  height: 300px;
+  resize: vertical;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.save-button,
+.cancel-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.25s;
+}
+
+.save-button {
+  background-color: #f6f6f6; /* Fondo gris un poco más claro al pasar el mouse */
+  color: #444; /* Texto claro */
+}
+
+.save-button:hover {
+  background-color: #444; /* Fondo gris un poco más claro al pasar el mouse */
+  color: #f6f6f6; /* Texto claro */
+}
+
+.cancel-button {
+  background-color: #444; /* Fondo gris oscuro */
+  color: #f6f6f6; /* Texto claro */
+}
+
+.cancel-button:hover {
+  background-color: #555; /* Fondo gris un poco más claro al pasar el mouse */
+}
+
+.error {
+  background-color: #1e1e1e;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.delete-button {
+  position: absolute;
+  bottom: 8px; /* Distancia desde la parte inferior */
+  right: 8px; /* Distancia desde la parte derecha */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ff4444; /* Color rojo para el icono */
+  font-size: 1.2em; /* Tamaño del icono */
+}
+
+.delete-button:hover {
+  color: #cc0000; /* Color rojo más oscuro al pasar el mouse */
+}

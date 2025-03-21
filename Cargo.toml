@@ -11,12 +11,15 @@ edition = "2021"
 tauri-build = { version = "1", features = [] }
 
 [dependencies]
-tauri = { version = "1", features = [ "dialog-all", "shell-open"] }
+tauri = { version = "1", features = ["dialog-all", "shell-open"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
-rusqlite = { version = "0.34.0", features = ["bundled"] }
-# diesel = { version = "2.2.0", features = ["sqlite", "returning_clauses_for_sqlite_3_35"] }
-# libsqlite3-sys = { version = "0.30", features = ["bundled"] }
+# rusqlite = { version = "0.34.0", features = ["bundled"] }
+diesel = { version = "2.2.0", features = [
+    "sqlite",
+    "returning_clauses_for_sqlite_3_35",
+] }
+libsqlite3-sys = { version = "0.30", features = ["bundled"] }
 dotenvy = "0.15"
 
 [features]

@@ -3,27 +3,52 @@
 
 mod database;
 mod models;
-// mod schema;
+mod schema;
 
-use database::{delete_post, get_posts, init_db, save_post};
-use models::Post;
+use database::{delete_post, establish_connection, get_posts, save_post, update_post};
+use models::{NewPost, Post};
 
 #[tauri::command]
 fn get_posts_command() -> Result<Vec<Post>, String> {
-    let conn = init_db().map_err(|e| e.to_string())?;
-    get_posts(&conn).map_err(|e| e.to_string())
+    let mut conn = establish_connection();
+    get_posts(&mut conn).map_err(|e| e.to_string())
 }
 
 #[tauri::command]
-fn save_post_command(post: Post) -> Result<(), String> {
-    let conn = init_db().map_err(|e| e.to_string())?;
-    save_post(&conn, post).map_err(|e| e.to_string())
+fn save_post_command(title: String, content: String, tags: String) -> Result<Post, String> {
+    let mut conn = establish_connection();
+    let new_post = NewPost {
+        title,
+        content,
+        tags,
+    };
+    save_post(&mut conn, new_post).map_err(|e| e.to_string())
 }
 
 #[tauri::command]
-fn delete_post_command(id: i32) -> Result<(), String> {
-    let conn = init_db().map_err(|e| e.to_string())?;
-    delete_post(&conn, id).map_err(|e| e.to_string())
+fn update_post_command(
+    id: i32,         // ID del post que se va a actualizar
+    title: String,   // Nuevo título
+    content: String, // Nuevo contenido
+    tags: String,    // Nuevas etiquetas
+) -> Result<Post, String> {
+    let mut conn = establish_connection();
+
+    // Crear una instancia de NewPost con los nuevos valores
+    let updated_post = NewPost {
+        title,
+        content,
+        tags,
+    };
+
+    // Llamar a la función update_post
+    update_post(&mut conn, id, updated_post).map_err(|e| e.to_string())
+}
+
+#[tauri::command]
+fn delete_post_command(post_id: i32) -> Result<usize, String> {
+    let mut conn = establish_connection();
+    delete_post(&mut conn, post_id).map_err(|e| e.to_string())
 }
 
 fn main() {
@@ -31,7 +56,8 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             get_posts_command,
             save_post_command,
-            delete_post_command
+            delete_post_command,
+            update_post_command
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

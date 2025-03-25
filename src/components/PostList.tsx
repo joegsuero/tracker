@@ -19,9 +19,9 @@ function PostList({
     event.stopPropagation();
 
     const confirmDelete = await confirm(
-      "¿Estás seguro de que quieres eliminar este elemento?",
+      "Are you sure you want to delete this item?",
       {
-        title: "Confirmar eliminación",
+        title: "Delete confirmation",
         type: "warning",
       }
     );
@@ -34,7 +34,7 @@ function PostList({
   return (
     <>
       <button className="add-button" onClick={onAddPost}>
-        Añadir Nueva Anotación
+        Add new entry
       </button>
       <ul className="post-list">
         {posts.map((post, index) => (
@@ -53,13 +53,12 @@ function PostList({
                   </span>
                 ))}
             </div>
-            {/* Botón de eliminar con icono de basura */}
             <button
               type="button"
               className="delete-button"
               onClick={(event) => handleDelete(event, post.id)}
             >
-              <FaTrash /> {/* Icono de cesto de basura */}
+              <FaTrash />
             </button>
           </li>
         ))}

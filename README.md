@@ -11,7 +11,7 @@ This directory contains the main files of Tracker application. The idea of this 
 **Notes**: 
 - If you want to contribute see contribution guide at the end of the file 👇
 - Propose any idea for the app, it could be interesting implement it.
-- Implement Rust code, this project is also a tool for learning.
+- Implement variety of Rust code and try new things on the project, this project is also a tool for learning.
 
 ## 📦 Prerequisites
 - Node.js (v18+)
@@ -42,9 +42,9 @@ This directory contains the main files of Tracker application. The idea of this 
     │   ├── App.tsx           # App entry
     │   ├── hooks/            # Custom hooks
     │   └── components/       # UI components
-    │       └──PostForm.tsx   # Form for create posts, tasks, etc
-    │       └──PostItem.tsx   # Item of the list of posts
-    │       └──PostList.tsx   # List of posts
+    │       ├──PostForm.tsx   # Form for create posts, tasks, etc
+    │       ├──PostItem.tsx   # Item of the list of posts
+    │       ├──PostList.tsx   # List of posts
     │       └──Tag.tsx        # Tag element of the Item
     src-tauri/                # Rust backend (see its README)
 ```

@@ -7,7 +7,7 @@
     "distDir": "../dist"
   },
   "package": {
-    "productName": "mood-tracker",
+    "productName": "tracker",
     "version": "0.1.0"
   },
   "tauri": {

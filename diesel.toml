@@ -6,4 +6,5 @@ file = "src/schema.rs"
 custom_type_derives = ["diesel::query_builder::QueryId", "Clone"]
 
 [migrations_directory]
-dir = "C:\\Jose\\0-Proyectos\\2-Backend\\Rust\\mood-tracker\\mood-tracker\\src-tauri\\migrations"
+# I did modify this line for don't show my file system structure.
+dir = ".\\migrations"

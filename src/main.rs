@@ -27,21 +27,19 @@ fn save_post_command(title: String, content: String, tags: String) -> Result<Pos
 
 #[tauri::command]
 fn update_post_command(
-    id: i32,         // ID del post que se va a actualizar
-    title: String,   // Nuevo título
-    content: String, // Nuevo contenido
-    tags: String,    // Nuevas etiquetas
+    id: i32,
+    title: String,
+    content: String,
+    tags: String,
 ) -> Result<Post, String> {
     let mut conn = establish_connection();
 
-    // Crear una instancia de NewPost con los nuevos valores
     let updated_post = NewPost {
         title,
         content,
         tags,
     };
 
-    // Llamar a la función update_post
     update_post(&mut conn, id, updated_post).map_err(|e| e.to_string())
 }
 

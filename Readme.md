@@ -11,7 +11,7 @@ This directory contains the Rust backend for the Tracker application. The idea o
 **Notes**: 
 - If you want to contribute see contribution guide at the end of the file 👇
 - Propose any idea for the app, it could be interesting implement it.
-- Implement Rust code, this project is also a tool for learning.
+- Implement variety of Rust code and try new things on the project, this project is also a tool for learning.
 
 ## 🛠 Tech Stack
 - **Rust** (v1.85.1)
@@ -27,7 +27,8 @@ This directory contains the Rust backend for the Tracker application. The idea o
     │   ├── schema.rs        # Diesel table definitions
     │   └── database.rs      # DB connection setup
     ├── Cargo.toml           # Rust dependencies
-    └── tauri.conf.json      # Tauri configuration
+    ├── tauri.conf.json      # Tauri configuration
+    └── .env                 # Enviroment variables
 
 ## 🚀 Setup
 1. Install Rust:

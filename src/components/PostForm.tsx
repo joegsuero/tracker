@@ -29,14 +29,14 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        placeholder="Título"
+        placeholder="Title"
         className="title-input"
         required
       />
       <textarea
         value={content}
         onChange={(e) => setContent(e.target.value)}
-        placeholder="Escribe tu anotación aquí..."
+        placeholder="Write here your entry..."
         className="content-textarea"
         required
       />
@@ -44,7 +44,7 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
         type="text"
         value={tags}
         onChange={(e) => setTags(e.target.value)}
-        placeholder="Etiquetas (separadas por comas)"
+        placeholder="Tags (separated by commas)"
         className="tags-input"
       />
       <div className="form-buttons">

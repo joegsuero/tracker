@@ -44,8 +44,8 @@ h1 {
 .post-list {
   list-style: none;
   padding: 0;
-  width: 100%;
   max-width: 800px;
+  width: 100%;
 }
 
 .post-item {
@@ -57,6 +57,7 @@ h1 {
   cursor: pointer;
   transition: background-color 0.25s;
   position: relative;
+  min-width: 400px;
 }
 
 .post-item:hover {
@@ -174,4 +175,33 @@ h1 {
 
 .delete-button:hover {
   color: #cc0000;
+}
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pagination-button {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pagination-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-indicator {
+  font-size: 0.9rem;
+  color: #ffffff;
 }

@@ -12,6 +12,13 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
   const [content, setContent] = useState(post?.content || "");
   const [tags, setTags] = useState(post?.tags || "");
 
+  const exit = () => {
+    setTitle("");
+    setContent("");
+    setTags("");
+    onCancel();
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSave(
@@ -21,6 +28,7 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
     );
     setTitle("");
     setContent("");
+    setTags("");
   };
 
   return (
@@ -51,7 +59,7 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
         <button type="submit" className="save-button">
           Guardar
         </button>
-        <button type="button" className="cancel-button" onClick={onCancel}>
+        <button type="button" className="cancel-button" onClick={exit}>
           Cancelar
         </button>
       </div>

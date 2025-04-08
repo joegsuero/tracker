@@ -9,9 +9,8 @@ interface PostListProps {
   onDeletePost: (id: number) => void;
 }
 
-// Constantes para configuración
-const ITEMS_PER_PAGE = 4; // Número de posts por página
-const MAX_CONTENT_LENGTH = 150; // Máximo de caracteres para el contenido
+const ITEMS_PER_PAGE = 3;
+const MAX_CONTENT_LENGTH = 150;
 
 function PostList({
   posts,
@@ -19,13 +18,11 @@ function PostList({
   onEditPost,
   onDeletePost,
 }: PostListProps) {
-  // Estado para la paginación
   const [currentPage, setCurrentPage] = useState(1);
+  const [filter, setFilter] = useState("");
 
-  // Calcular el total de páginas
   const totalPages = Math.ceil(posts.length / ITEMS_PER_PAGE);
 
-  // Obtener posts para la página actual
   const currentPosts = posts.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
     currentPage * ITEMS_PER_PAGE
@@ -43,14 +40,12 @@ function PostList({
 
     if (confirmDelete) {
       onDeletePost(id);
-      // Resetear a la primera página si quedó vacía la página actual
       if (currentPosts.length === 1 && currentPage > 1) {
         setCurrentPage(currentPage - 1);
       }
     }
   };
 
-  // Función para truncar texto con ellipsis
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
@@ -58,40 +53,59 @@ function PostList({
 
   return (
     <div className="post-list-container">
-      <button className="add-button" onClick={onAddPost}>
-        Add new entry
-      </button>
+      <h1 style={{ justifySelf: "self-start" }}>Notes</h1>
 
+      <div className="post-list-container-controls">
+        <button className="add-button" onClick={onAddPost}>
+          Add new note
+        </button>
+
+        <input
+          type="text"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value.toLowerCase())}
+          placeholder="Write for filter your notes"
+          className="search-input"
+          required
+        />
+      </div>
       <ul className="post-list">
-        {currentPosts.map((post, index) => (
-          <li
-            key={index}
-            className="post-item"
-            onClick={() =>
-              onEditPost((currentPage - 1) * ITEMS_PER_PAGE + index)
-            }
-          >
-            <h2>{post.title}</h2>
-            <p className="post-content" title={post.content}>
-              {truncateText(post.content, MAX_CONTENT_LENGTH)}
-            </p>
-            <div className="tags">
-              {post.tags.length > 0 &&
-                post.tags.split(",").map((tag: string, idx: number) => (
-                  <span key={idx} className="tag">
-                    {tag}
-                  </span>
-                ))}
-            </div>
-            <button
-              type="button"
-              className="delete-button"
-              onClick={(event) => handleDelete(event, post.id)}
+        {currentPosts
+          .filter(
+            (post) =>
+              post.content.toLowerCase().includes(filter) ||
+              post.title.toLowerCase().includes(filter) ||
+              post.tags.toLowerCase().includes(filter)
+          )
+          .map((post, index) => (
+            <li
+              key={index}
+              className="post-item"
+              onClick={() =>
+                onEditPost((currentPage - 1) * ITEMS_PER_PAGE + index)
+              }
             >
-              <FaTrash />
-            </button>
-          </li>
-        ))}
+              <h2>{post.title}</h2>
+              <p className="post-content" title={post.content}>
+                {truncateText(post.content, MAX_CONTENT_LENGTH)}
+              </p>
+              <div className="tags">
+                {post.tags.length > 0 &&
+                  post.tags.split(",").map((tag: string, idx: number) => (
+                    <span key={idx} className="tag">
+                      {tag}
+                    </span>
+                  ))}
+              </div>
+              <button
+                type="button"
+                className="delete-button"
+                onClick={(event) => handleDelete(event, post.id)}
+              >
+                <FaTrash />
+              </button>
+            </li>
+          ))}
       </ul>
 
       {/* Paginación */}

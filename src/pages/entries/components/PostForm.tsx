@@ -33,6 +33,7 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
 
   return (
     <form className="edit-form" onSubmit={handleSubmit}>
+      <h1>{id ? "Edit" : "Add"} note</h1>
       <input
         type="text"
         value={title}
@@ -57,10 +58,10 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
       />
       <div className="form-buttons">
         <button type="submit" className="save-button">
-          Guardar
+          Save
         </button>
         <button type="button" className="cancel-button" onClick={exit}>
-          Cancelar
+          Cancel
         </button>
       </div>
     </form>

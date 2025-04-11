@@ -1,4 +1,6 @@
 import { useState } from "react";
+import EditorContainer from "./EditorContainer";
+import MDEditor from "@uiw/react-md-editor";
 
 interface PostFormProps {
   id: number;
@@ -11,6 +13,7 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
   const [title, setTitle] = useState(post?.title || "");
   const [content, setContent] = useState(post?.content || "");
   const [tags, setTags] = useState(post?.tags || "");
+  const [isMarkdown, setIsMarkdown] = useState(false);
 
   const exit = () => {
     setTitle("");
@@ -33,7 +36,25 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
 
   return (
     <form className="edit-form" onSubmit={handleSubmit}>
-      <h1>{id ? "Edit" : "Add"} note</h1>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h1>{id ? "Edit" : "Add"} note</h1>
+        <button
+          className="mkd-button"
+          onClick={(e) => {
+            e.preventDefault();
+            setIsMarkdown(!isMarkdown);
+          }}
+        >
+          {isMarkdown ? "Markdown" : "Conventional"}
+        </button>
+      </div>
       <input
         type="text"
         value={title}
@@ -42,13 +63,26 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
         className="title-input"
         required
       />
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        placeholder="Write here your entry..."
-        className="content-textarea"
-        required
-      />
+
+      {isMarkdown ? (
+        <div>
+          <MDEditor
+            style={{ minHeight: "350px" }}
+            value={content}
+            onChange={setContent}
+          />
+          {/* <MDEditor.Markdown
+            source={content}
+            style={{ whiteSpace: "pre-wrap" }}
+          /> */}
+        </div>
+      ) : (
+        <EditorContainer
+          placeholder={"Write here your entry..."}
+          content={content}
+          setContent={setContent}
+        />
+      )}
       <input
         type="text"
         value={tags}

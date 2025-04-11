@@ -15,6 +15,7 @@ function Entries() {
   const [currentPost, setCurrentPost] = useState<number | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchPosts();
@@ -49,18 +50,24 @@ function Entries() {
       {errors && <span className="error">{errors}</span>}
       {!isEditing ? (
         <PostList
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
           posts={posts}
           onAddPost={() => setIsEditing(true)}
-          onEditPost={(index) => {
+          onEditPost={(id) => {
             setIsEditing(true);
-            setCurrentPost(index);
+            setCurrentPost(id);
           }}
           onDeletePost={handleDeletePost}
         />
       ) : (
         <PostForm
-          id={currentPost !== null ? posts[currentPost].id ?? 0 : 0}
-          post={currentPost !== null ? posts[currentPost] : null}
+          id={currentPost !== null ? currentPost ?? 0 : 0}
+          post={
+            currentPost !== null
+              ? posts.find((post) => post?.id == currentPost)
+              : null
+          }
           onSave={handleSavePost}
           onCancel={() => setIsEditing(false)}
         />

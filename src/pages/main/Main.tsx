@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./main.css";
 import Entries from "../entries/Entries";
 import { FaChevronLeft } from "react-icons/fa6";
+import LLM from "../llm/LLM";
 
 const Main = () => {
   const [currentView, setCurrentView] = useState<React.ReactNode | null>(null);
@@ -96,12 +97,7 @@ const FinanceApp = () => (
   </div>
 );
 
-const LLMChatApp = () => (
-  <div className="app-container">
-    <h2 className="app-title">Chat con LLM</h2>
-    <p>Aquí iría tu componente de chat con modelos de lenguaje...</p>
-  </div>
-);
+const LLMChatApp = () => <LLM />;
 
 const SettingsApp = () => (
   <div className="app-container">

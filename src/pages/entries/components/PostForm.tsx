@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
+import ImageUploader from "./ImageUploader";
 
 interface PostFormProps {
   id: number;
@@ -92,6 +93,7 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
         }}
       >
         <h1>{id ? "Edit" : "Add"} note</h1>
+        <ImageUploader />
       </div>
       <input
         type="text"

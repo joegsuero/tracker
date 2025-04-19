@@ -11,6 +11,7 @@ function ImageUploader() {
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
@@ -69,7 +70,11 @@ function ImageUploader() {
         {uploadedImages.length > 0 && (
           <button
             className="view-images-button"
-            onClick={() => setShowModal(true)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setShowModal(true);
+            }}
             title="Ver imágenes subidas"
           >
             <FaImages size={20} />

@@ -1,8 +1,11 @@
+import html2pdf from "html2pdf.js";
 import { useState, useRef, useEffect } from "react";
+import ReactDOMServer from "react-dom/server";
+import ImageUploader from "./ImageUploader";
 import MDEditor from "@uiw/react-md-editor";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
-import ImageUploader from "./ImageUploader";
+import ReactMarkdown from "react-markdown";
 
 interface PostFormProps {
   id: number;
@@ -18,6 +21,49 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
   const [toolbarUp, setToolbarUp] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
   const observerRef = useRef<IntersectionObserver | null>(null);
+
+  const exportToPDF = () => {
+    const markdownHtml = ReactDOMServer.renderToString(
+      <div
+        style={{
+          color: "#000000",
+          fontFamily: "Arial, sans-serif",
+          padding: "20px",
+          backgroundColor: "#FFFFFF",
+        }}
+      >
+        <ReactMarkdown>{content}</ReactMarkdown>
+      </div>
+    );
+
+    const opt = {
+      filename: `${title || "documento"}.pdf`,
+      image: {
+        type: "jpeg",
+        quality: 1, // Máxima calidad
+      },
+      html2canvas: {
+        scale: 2,
+        backgroundColor: "#FFFFFF",
+      },
+      jsPDF: {
+        unit: "mm",
+        format: "a4",
+      },
+    };
+
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = markdownHtml;
+    document.body.appendChild(tempDiv);
+
+    html2pdf()
+      .set(opt)
+      .from(tempDiv)
+      .save()
+      .finally(() => {
+        document.body.removeChild(tempDiv);
+      });
+  };
 
   useEffect(() => {
     if (!editorRef.current) return;
@@ -128,6 +174,14 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
         </button>
         <button type="button" className="cancel-button" onClick={exit}>
           Cancel
+        </button>
+        <button
+          type="button"
+          className="cancel-button"
+          onClick={exportToPDF}
+          style={{ marginLeft: "10px", backgroundColor: "#4CAF50" }}
+        >
+          Export to PDF
         </button>
       </div>
     </form>

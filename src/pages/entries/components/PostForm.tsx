@@ -6,6 +6,7 @@ import MDEditor from "@uiw/react-md-editor";
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 import ReactMarkdown from "react-markdown";
+import { FaFilePdf } from "react-icons/fa";
 
 interface PostFormProps {
   id: number;
@@ -32,6 +33,7 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
           color: "#000000",
           fontFamily: "Arial, sans-serif",
           padding: "20px",
+          margin: "10px",
           backgroundColor: "#FFFFFF",
         }}
       >
@@ -142,7 +144,18 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
         }}
       >
         <h1>{id ? "Edit" : "Add"} note</h1>
-        <ImageUploader />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            gap: "10px",
+          }}
+        >
+          <button type="button" className="export-button" onClick={exportToPDF}>
+            <FaFilePdf />
+          </button>
+          <ImageUploader />
+        </div>
       </div>
       <input
         type="text"
@@ -177,14 +190,6 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
         </button>
         <button type="button" className="cancel-button" onClick={exit}>
           Cancel
-        </button>
-        <button
-          type="button"
-          className="cancel-button"
-          onClick={exportToPDF}
-          style={{ marginLeft: "10px", backgroundColor: "#4CAF50" }}
-        >
-          Export to PDF
         </button>
       </div>
     </form>

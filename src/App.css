@@ -143,13 +143,27 @@ h1 {
 }
 
 .save-button,
-.cancel-button {
+.cancel-button,
+.export-button {
   padding: 10px 20px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
   font-size: 1em;
-  transition: background-color 0.25s;
+  transition: 0.25s;
+}
+
+.export-button {
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50%;
+  background-color: #4caf50;
+}
+
+.export-button:hover {
+  color: black;
+  transition: 0.25s;
+  background-color: white;
 }
 
 .mkd-button {

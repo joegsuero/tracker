@@ -23,6 +23,9 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   const exportToPDF = () => {
+    // Eliminar todas las imágenes del markdown (![alt](url))
+    const contentWithoutImages = content.replace(/!\[.*?\]\(.*?\)/g, "");
+
     const markdownHtml = ReactDOMServer.renderToString(
       <div
         style={{
@@ -32,7 +35,7 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
           backgroundColor: "#FFFFFF",
         }}
       >
-        <ReactMarkdown>{content}</ReactMarkdown>
+        <ReactMarkdown>{contentWithoutImages}</ReactMarkdown>
       </div>
     );
 
@@ -40,7 +43,7 @@ function PostForm({ id, post, onSave, onCancel }: PostFormProps) {
       filename: `${title || "documento"}.pdf`,
       image: {
         type: "jpeg",
-        quality: 1, // Máxima calidad
+        quality: 1,
       },
       html2canvas: {
         scale: 2,

@@ -2,6 +2,8 @@
 
 This directory contains the main files of Tracker application. The idea of this app is go deeper in the learning of the Rust programming language and at the same time create a useful tool for day to day tasks. Why Tracker? Because is for you to track your own stuffs. Any stuff...
 
+![Email management page](./assets/tracker.png) *Notes page*
+
 ## Some ideas for the app:
 - Allow to take notes and filter the notes by date, by categories
 - Have calendars for track habits, or any other idea. 
